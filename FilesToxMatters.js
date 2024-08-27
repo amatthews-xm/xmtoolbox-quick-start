@@ -3,7 +3,7 @@ const fs = require('fs');
 const { np, prod, xm } = require('./config');
 
 const env = np;
-const peoplePath = './examples/userupload.10.csv';
+const peoplePath = './examples/Single_Record_Everbridge.csv';
 const groupsPath = './examples/groups.csv';
 
 peopleAndGroups();
@@ -30,7 +30,7 @@ async function peopleAndGroups() {
 
   const deviceFields = ['deviceType', 'name', 'owner', 'targetName', 'emailAddress', 'phoneNumber'];
 
-  const groupFields = ['targetName', 'description'];
+  const groupFields = ['name', 'description'];
 
   // All of these options are optional. These are included for example purposes.
   // Docs:  https://brannonvann.github.io/xmtoolbox/module-sync.html#~SyncOptions
@@ -73,6 +73,7 @@ async function peopleAndGroups() {
     person.recipientType = 'PERSON';
     person.targetName = row.User;
     person.status = 'ACTIVE';
+    //person.properties['Paging Role'] = "Individual Contributor";
     if (row['First Name']) person.firstName = row['First Name'];
     if (row['Last Name']) person.lastName = row['Last Name'];
     if (row.Language) person.language = xm.dictionary.language.codeByName[row.Language];
